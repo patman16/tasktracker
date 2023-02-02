@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-  ScrollView,
+    ScrollView,
     Text,
-    View
   } from 'react-native';
 
 type TaskListProps = {
@@ -21,5 +20,5 @@ export default class TaskView extends React.Component<TaskListProps> {
           { taskList }
         </ScrollView>
       );
-    }
   }
+}

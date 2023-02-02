@@ -1,40 +1,34 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, {useState} from 'react';
-import {
-  useColorScheme,
-  TextInput,
-  View
-} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useColorScheme} from 'react-native';
+import LoginScreen from './pages/login';
+import HomeScreen from './pages/home';
 
-import TaskView from './components/taskView';
-
-type TaskState = {
-  tasks: string[]
-}
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const [tasks, setTasks] = useState<string[]>([]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? 'black' : 'white',
   };
 
-  function addTask(taskName: string) {
-    setTasks(oldArray => [...oldArray, taskName]);
-  }
-
   return (
-    <View>
-      <TextInput placeholder='Add task here' onSubmitEditing={(event) => addTask( event.nativeEvent.text)}></TextInput>
-      <TaskView tasks={tasks}></TaskView>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{title: 'Login'}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Welcome'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
